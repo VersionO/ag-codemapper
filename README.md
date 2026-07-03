@@ -56,11 +56,11 @@ Ensure you have the following installed on your machine:
 Once your MCP server is configured and your project is loaded in the Antigravity IDE:
 
 1. Open the **Chat** or **Agent** interface within the IDE.
-2. Ensure your code to be analyzed is placed in a sub-folder within your project root (e.g., `./code_to_analyze/`).
+2. Ensure your code to be analyzed is placed in a sub-folder within your project root (e.g., `./Code to Analyze/`).
 3. Use the following prompt to trigger the agent's multi-skill analysis:
 
     **Example Prompt:**
-    > Please analyze files in "./code_to_analyze/" using your skills for pipeline mapping, architectural analysis, and code explanation.
+    > Please analyze files in "./Code to Analyze/" using your skills for pipeline mapping, architectural analysis, and code explanation.
 
 ### 4. Outputs
 The agent stores all generated insights in the `/output` folder.
