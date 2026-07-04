@@ -66,6 +66,8 @@ Ensure you have the following installed on your machine:
     * *macOS/Linux:* `curl -LsSf https://astral.sh/uv/install.sh | sh`
     * *Windows (PowerShell):* `irm https://astral.sh/uv/install.ps1 | iex`
 
+<br>
+
 ### 2. Initial Setup
 1. **Clone the repository:**
     ```bash
@@ -93,10 +95,9 @@ Ensure you have the following installed on your machine:
       ![MCP Config.png](assets/MCP%20Config.png)
 
     * Select all content of the `~/.gemini/config/mcp_config.json`, and paste the content of your generated `mcp_config.json` into this file and click **Save**.
+<br>
 
----
-
-### 🚀 3. Implementation
+### 3. Implementation
 Once your MCP server is configured and your project is loaded in the Antigravity IDE:
 
 1. Open the **Chat** or **Agent** view within the IDE.
@@ -106,9 +107,9 @@ Once your MCP server is configured and your project is loaded in the Antigravity
     **Example Prompt:**
     > Please analyze files in "./Test/" using your skills for pipeline mapping, architectural analysis, and code explanation.
 
----
+<br>
 
-### 📊 4. Outputs
+### 4. Outputs
 The agent stores all generated insights in the `/output` folder as structured Markdown files.
 
 * **Report Example**: You can view a [Sample Analysis Report](examples/analysis_report.md) to see how the system compiles structural dependencies and architectural risks.
