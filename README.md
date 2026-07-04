@@ -16,7 +16,9 @@ Developers often spend up to 40% of their time mapping codebases rather than bui
 *   **Modular Automation**: The system was generated via the ADK CLI to wire custom skills (`.agents/`) and workflows (`AGENTS.md`) into a cohesive agent runner designed specifically for dependency analysis without unnecessary cloud deployment.
 *   **Context Management**: Beyond standard `.gitignore` files, we utilize a specialized ignore-file for the **CGC (Code Generation Context)** to prevent the agent from being confused by temporary artifacts, ensuring the model focuses only on relevant structural logic.
 
-## 🏗️ Architecture
+---
+
+## 🔳 Architecture
 Agentic CodeMapper operates as a **single-agent system with multi-skill capabilities**, governed by a strict set of configuration and operational files that define the agent's behavior and scope.
 
 ### Foundational Components
@@ -34,7 +36,28 @@ The system maps incoming queries to domain-specific skill definitions found in `
 
 ---
 
-## 🛠️ Setup Instructions
+## 🛠️ Development & Build Process
+This project was developed through an iterative process of architectural design, hands-on testing, and CLI-driven orchestration:
+
+1.  **Foundational Design**: We established the system's logic by creating the core skill definitions within `.agents/`, the workflow directives in `AGENTS.md`, and the operational guardrails in `CONTEXT.md`.
+2.  **IDE Testing & Refinement**: We performed iterative testing within the Antigravity IDE, utilizing terminal commands to resolve dependency conflicts and refine the `mcp_config.json` configuration until the agent connection was fully functional.
+3.  **Environment Setup**: We developed and refined the `setup.sh` script to streamline the creation of the virtual environment and ensure minimal-step configuration for any user cloning the repository.
+4.  **CLI-Driven Generation**: With the core logic solidified, we generated the `app/agent.py` runner using the ADK 2.0 CLI with the following prompt:
+   
+    > "Use ADK 2.0 to generate the app/agent.py and configuration for ag-codemapper. I have already defined the skills in .agents/, the CONTEXT.md, and the workflow in agent.md. Please wire these existing skills into the agent runner to execute the dependency analysis without creating any deployment files."
+6.  **Validation**: Post-generation, we finalized security configurations (including specialized ignore files like `.gitignore`) and validated the system by generating live analysis reports and accessing interactive flowchart graphs locally within the Antigravity IDE.
+
+---
+
+## 🔗 MCP Integration
+Agentic CodeMapper utilizes the **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro)** to securely interface with your local files.
+
+* **MCP Server Name:** [`CodeGraphContext`](https://github.com/CodeGraphContext/CodeGraphContext)
+* **Primary Tools:** Used for filesystem traversal, recursive code parsing, and structural dependency extraction.
+
+---
+
+## ⚙️ Setup Instructions
 
 ### 1. Prerequisites
 Ensure you have the following installed on your machine:
@@ -44,7 +67,7 @@ Ensure you have the following installed on your machine:
     * *Windows (PowerShell):* `irm https://astral.sh/uv/install.ps1 | iex`
 
 ### 2. Initial Setup
-1.  **Clone the repository:**
+1. **Clone the repository:**
     ```bash
     git clone https://github.com/VersionO/ag-codemapper.git
     cd ag-codemapper
@@ -60,7 +83,7 @@ Ensure you have the following installed on your machine:
     * **Environment:** If a `.env` file is not detected, the script will create one from `.env.template` and terminate. Open it, configure your authentication (Gemini API Key or Vertex AI), and re-run `./setup.sh`.
     * **MCP Auto-Configuration:** The script will automatically use `mcp_config.json.template` to generate a `mcp_config.json` file, dynamically populating it with the absolute path of your local repository.
 
-4. **Antigravity IDE Setup:**
+- **Antigravity IDE Setup:**
     * Open your project folder in the Antigravity IDE.
     * Click on the three dots (Additional Options) at the top right corner.
     * Select **MCP Servers**.
@@ -71,7 +94,9 @@ Ensure you have the following installed on your machine:
 
     * Select all content of the `~/.gemini/config/mcp_config.json`, and paste the content of your generated `mcp_config.json` into this file and click **Save**.
 
-### 3. Usage
+---
+
+### 🚀 3. Implementation
 Once your MCP server is configured and your project is loaded in the Antigravity IDE:
 
 1. Open the **Chat** or **Agent** view within the IDE.
@@ -81,21 +106,23 @@ Once your MCP server is configured and your project is loaded in the Antigravity
     **Example Prompt:**
     > Please analyze files in "./Test/" using your skills for pipeline mapping, architectural analysis, and code explanation.
 
-### 4. Outputs
-The agent stores all generated insights in the `/output` folder.
-* **Graph Visualization:** A link to the generated architectural graph will be provided in the agent's response, allowing you to visualize dependencies and logic flows.
-
-  ![Visualization Link.png](assets/Visualization%20Link.png)
-
-  ![Graph 1 - App.py Flowchart.png](assets/Graph%201%20-%20App.py%20Flowchart.png)
-
 ---
 
-## 🔗 MCP Integration
-Agentic CodeMapper utilizes the **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro)** to securely interface with your local files.
+### 📊 4. Outputs
+The agent stores all generated insights in the `/output` folder as structured Markdown files.
 
-* **MCP Server Name:** [`CodeGraphContext`](https://github.com/CodeGraphContext/CodeGraphContext)
-* **Primary Tools:** Used for filesystem traversal, recursive code parsing, and structural dependency extraction.
+* **Report Example**: You can view a [Sample Analysis Report](examples/analysis_report.md) to see how the system compiles structural dependencies and architectural risks.
+
+* **Visualization Link**: Every analysis includes a link to the visual graph. 
+  > **Note**: To prevent connection errors, you must run the update command and start the visualization server (`uv run python -m codegraphcontext visualize`) before accessing this link.
+  
+  ![Visualization Link](assets/Visualization%20Link.png)
+
+* **Graph Flowchart**: Once the server is active, the link renders an interactive flowchart representing the codebase dependencies and logic flows:
+
+  ![Graph 1 - App.py Flowchart](assets/Graph%201%20-%20App.py%20Flowchart.png)
+
+---
 
 ## 🛡️ Security & Privacy Protocols
 * **Credential Isolation:** We do not store credentials in the source code; the `.env` file is explicitly protected by being ignored across Git, the agent's `CONTEXT.md`, and the MCP via the `CGCignore` file.
