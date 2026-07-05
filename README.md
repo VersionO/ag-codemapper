@@ -10,49 +10,50 @@
 Developers often spend up to 40% of their time mapping codebases rather than building features. Traditional documentation is frequently outdated, leading to slow onboarding and high risks of unintended "blast radius" effects. Furthermore, relying on cloud-based AI to analyze proprietary code necessitates uploading sensitive business logic to external servers, creating a significant security dilemma.
 
 ## 💡 The Solution
-**Agentic-CodeMapper** is an advanced orchestrator built using the **Google Agent Development Kit (ADK) 2.0**. It leverages the CodeGraphContext (CGC) MCP server to analyze and visualize software structural dependencies. The system offers several key advantages:
+**Agentic-CodeMapper** is an advanced orchestrator built using the **Google Agent Development Kit (ADK) 2.0**. It leverages the **CodeGraphContext (CGC)** MCP server to transform a codebase into a symbol-level graph, enabling precise, context-aware dependency analysis. The system offers several key advantages:
 
-*   **Privacy-First Design**: While this demonstration uses the Gemini API or Vertex AI for ease of setup, the ADK architecture allows developers to swap the model for a local, private LLM, ensuring proprietary code never leaves the local environment.
-*   **Modular Automation**: The system was generated via the ADK CLI to wire custom skills (`.agents/`) and workflows (`AGENTS.md`) into a cohesive agent runner designed specifically for dependency analysis without unnecessary cloud deployment.
-*   **Context Management**: Beyond standard `.gitignore` files, we utilize a specialized ignore-file for the **CGC (Code Generation Context)** to prevent the agent from being confused by temporary artifacts, ensuring the model focuses only on relevant structural logic.
-
+*   **Privacy-First Design**: While the system defaults to Gemini or Vertex AI / Google Cloud for initial setup, the ADK architecture utilizes a `LiteLlm` interface, allowing developers to swap the cloud-based backend for a local, private LLM (via Ollama or other providers) to ensure proprietary logic remains on-device.
+*   **Modular Automation**: The system is generated via the ADK CLI to wire custom skills (`.agents/`) and structured workflows (`Agents.md`) into a cohesive agent runner, enabling deep structural analysis without the overhead of complex cloud-based deployments.
+*   **Contextual Filtering**: By integrating the **CGC MCP server**, we move beyond simple `.gitignore` rules. The system intelligently indexes only the relevant structural graph—functions, classes, and inheritance—preventing "token spam" from environment files or build artifacts and ensuring the model focuses exclusively on the logic that matters.
 ---
 
-## 🔳 Architecture
-Agentic CodeMapper operates as a **single-agent system with multi-skill capabilities**, governed by a strict set of configuration and operational files that define the agent's behavior and scope.
+## 🏛️ Architecture
+Agentic CodeMapper operates as a **single-agent system with multi-skill capabilities**, governed by a strict configuration framework that defines the agent's behavior and operational scope.
 
 ### Foundational Components
-* **`AGENTS.md`**: Serves as the Global Orchestrator Directive, defining routing protocols, skill definitions, and the mandatory execution flow for the agent.
-* **`CONTEXT.md`**: Establishes the core operational guardrails, enforcing strict encapsulation, visualization requirements, and mandatory reporting standards.
+*   **`Agents.md`**: Acts as the Global Orchestrator Directive, defining routing protocols, skill definitions, and the mandatory execution flow for the agent.
+*   **`CONTEXT.md`**: Establishes the core operational guardrails, enforcing strict encapsulation, visualization requirements, and mandatory reporting standards.
 
 ### Multi-Skill Capabilities
-The agent uses a sophisticated routing mechanism to invoke specific skills based on user intent:
-* **Pipeline Mapper**: Handles indexing and dependency synchronization.
-* **Architectural Analyzer**: Evaluates code complexity, coupling, and impact/blast radius at the symbol/function level.
-* **Code Explainer**: Synthesizes holistic walkthroughs combining raw code logic, global semantic search, and identified framework patterns.
+The agent employs a sophisticated routing mechanism to invoke specific skills based on user intent:
+*   **Pipeline Mapper**: Handles indexing and dependency synchronization.
+*   **Architectural Analyzer**: Evaluates code complexity, coupling, and impact/blast radius at the symbol/function level.
+*   **Code Explainer**: Synthesizes holistic walkthroughs combining raw code logic, global semantic search, and identified framework patterns.
 
 ### Routing & Execution
 The system maps incoming queries to domain-specific skill definitions found in `.agents/skills/`. By maintaining a clear separation between infrastructure (Pipeline Mapping), diagnostics (Architectural Analysis), and logic (Code Explainer), the agent ensures efficient, modular, and secure code comprehension.
 
 ---
 
-## 🛠️ Development & Build Process
+## 🛠️ Development Process
 This project was developed through an iterative process of architectural design, hands-on testing, and CLI-driven orchestration:
 
-1.  **Foundational Design**: We established the system's logic by creating the core skill definitions within `.agents/`, the workflow directives in `AGENTS.md`, and the operational guardrails in `CONTEXT.md`.
+1.  **Foundational Design**: We established the system's logic by creating the core skill definitions within `.agents/`, the workflow directives in `Agents.md`, and the operational guardrails in `CONTEXT.md`.
 2.  **IDE Testing & Refinement**: We performed iterative testing within the Antigravity IDE, utilizing terminal commands to resolve dependency conflicts and refine the `mcp_config.json` configuration until the agent connection was fully functional.
 3.  **Environment Setup**: We developed and refined the `setup.sh` script to streamline the creation of the virtual environment and ensure minimal-step configuration for any user cloning the repository.
 4.  **CLI-Driven Generation**: With the core logic solidified, we generated the `app/agent.py` runner using the ADK 2.0 CLI with the following prompt:
-   
+    
     > "Use ADK 2.0 to generate the app/agent.py and configuration for ag-codemapper. I have already defined the skills in .agents/, the CONTEXT.md, and the workflow in agent.md. Please wire these existing skills into the agent runner to execute the dependency analysis without creating any deployment files."
-6.  **Validation**: Post-generation, we finalized security configurations (including specialized ignore files like `.gitignore`) and validated the system by generating live analysis reports and accessing interactive flowchart graphs locally within the Antigravity IDE.
+
+    *Developers can manually modify the `app/agent.py` runner or the associated configuration files to point to local, private LLM instances (such as Ollama or other self-hosted providers), allowing you to maintain full data sovereignty as your requirements evolve.*
+5.  **Validation**: Post-generation, we finalized security configurations (including specialized ignore files like `.gitignore`) and validated the system by generating live analysis reports and accessing interactive flowchart graphs locally within the Antigravity IDE.
 
 ---
 
 ## 🔗 MCP Integration
 Agentic CodeMapper utilizes the **[Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro)** to securely interface with your local files.
 
-* **MCP Server Name:** [`CodeGraphContext`](https://github.com/CodeGraphContext/CodeGraphContext)
+* **MCP Server:** [CodeGraphContext](https://github.com/CodeGraphContext/CodeGraphContext)
 * **Primary Tools:** Used for filesystem traversal, recursive code parsing, and structural dependency extraction.
 
 ---
@@ -78,8 +79,9 @@ Ensure you have the following installed on your machine:
 2. **Run the setup script:**
     ```bash
     chmod +x setup.sh
-    ./setup.sh
+    source setup.sh
     ```
+   *(Note: You must use `source setup.sh` rather than `./setup.sh`. Using `source` ensures that your API keys and configuration settings are exported directly into your current terminal session; running it with `./` would execute the script in a temporary sub-process, causing the environment configuration to be lost immediately upon completion.)*
 
 3. **Configure Environment & MCP:**
     * **Environment:** If a `.env` file is not detected, the script will create one from `.env.template` and terminate. Open it, configure your authentication (Gemini API Key or Vertex AI), and re-run `./setup.sh`.
@@ -122,6 +124,8 @@ The agent stores all generated insights in the `/output` folder as structured Ma
 * **Graph Flowchart**: Once the server is active, the link renders an interactive flowchart representing the codebase dependencies and logic flows:
 
   ![Graph 1 - App.py Flowchart](assets/Graph%201%20-%20App.py%20Flowchart.png)
+
+  ![Graph 2 - App.py Flowchart](assets/Graph%202%20-%20App.py%20Flowchart.png)
 
 ---
 
