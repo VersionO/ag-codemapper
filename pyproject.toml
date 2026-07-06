@@ -3,7 +3,7 @@ name = "ag-codemapper"
 version = "0.1.0"
 description = "ADK 2.0 Agent for Code Comprehension and Dependency Analysis"
 authors = [
-    {name = "Layal A."},
+    {name = "VersionO"},
 ]
 
 dependencies = [
