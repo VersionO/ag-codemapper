@@ -8,8 +8,8 @@
 ---
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=WzIA95IRsJY">
-    <img src="https://img.youtube.com/vi/WzIA95IRsJY/maxresdefault.jpg" alt="Watch the Agentic-CodeMapper Demo" width="100%">
+  <a href="https://www.youtube.com/watch?v=1jpwiDI-dYA">
+    <img src="https://img.youtube.com/vi/1jpwiDI-dYA/maxresdefault.jpg" alt="Watch the Agentic-CodeMapper Demo" width="100%">
   </a>
 </p>
 <p align="center">
@@ -36,7 +36,7 @@ Developers often spend up to 40% of their time mapping codebases rather than bui
 
 *   **Privacy-First Design**: While the system defaults to Gemini or Vertex AI / Google Cloud for initial setup, the ADK architecture utilizes a `LiteLlm` interface, allowing developers to swap the cloud-based backend for a local, private LLM (via Ollama or other providers) to ensure proprietary logic remains on-device.
 
-*   **Modular Automation**: The system is generated via the ADK CLI to wire custom skills (`.agents/`) and structured workflows (`Agents.md`) into a cohesive agent runner, enabling deep structural analysis without the overhead of complex cloud-based deployments.
+*   **Modular Automation**: The system is generated via the ADK CLI to wire custom skills (`.agents/Skills/`) and structured workflows (`Agents.md`) into a cohesive agent runner, and is governed by the `CONTEXT.md` file, enabling deep structural analysis without the overhead of complex cloud-based deployments.
 
 *   **Contextual Filtering**: By integrating the **CGC MCP server**, we move beyond simple `.gitignore` rules. The system intelligently indexes only the relevant structural graph—functions, classes, and inheritance—preventing "token spam" from environment files or build artifacts and ensuring the model focuses exclusively on the logic that matters.
 
@@ -177,7 +177,9 @@ The agent stores all generated insights in the `/output` folder as structured Ma
 
 ## 📝 License
 
-This project is licensed under the **MIT License**. 
+This project is dual-licensed to ensure both the software and the documentation are properly protected:
 
-*Note: As a submission for the [Kaggle AI Agents Capstone](https://www.kaggle.com/competitions/vibecoding-agents-capstone-project/overview), this project is also subject to the terms and conditions outlined in the official competition rules.* 
+* **Software:** The source code and implementation scripts in this repository are licensed under the [MIT License](https://opensource.org/licenses/MIT).
+* **Documentation:** This project writeup and associated documentation are licensed under the [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) license.
 
+*Note: As a submission for the [Kaggle AI Agents Capstone](https://www.kaggle.com/competitions/vibecoding-agents-capstone-project/overview), this project is also subject to the terms and conditions outlined in the official competition rules.*
