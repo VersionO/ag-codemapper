@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "codegraphcontext": {
+      "command": "{{PROJECT_ROOT}}/.venv/bin/python",
+      "args": ["-m", "codegraphcontext", "mcp", "start"],
+      "env": {
+        "CGC_DB_PATH": "{{PROJECT_ROOT}}/.codegraph_db"
+      }
+    },
+  }
+}

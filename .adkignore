@@ -1,0 +1,39 @@
+# --- Build Artifacts & Environment ---
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# --- Configuration & Metadata ---
+.codegraph_db/
+package.json
+package-lock.json
+mcp_config.json
+
+
+# --- Project Infrastructure ---
+Test/
+Output/
+.google-agents-cli/
+.git/
+.gitignore
+.idkignore
+
+
+# --- System ---
+.DS_Store
+Thumbs.db
+*.log
+
+# --- ADK Session State ---
+.adk/session.db
+.adk/
+
+# --- Local IDE Settings ---
+.vscode/
+
+# --- Project/Tool Manifests ---
+agents-cli-manifest.yaml
