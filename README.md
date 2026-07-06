@@ -7,9 +7,14 @@
 
 ---
 
-<a href="https://www.youtube.com/watch?v=WzIA95IRsJY">
-  <img src="https://img.youtube.com/vi/WzIA95IRsJY/maxresdefault.jpg" alt="Watch the Demo Video" width="100%">
-</a>
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=WzIA95IRsJY">
+    <img src="https://img.youtube.com/vi/WzIA95IRsJY/maxresdefault.jpg" alt="Watch the Agentic-CodeMapper Demo" width="100%">
+  </a>
+</p>
+<p align="center">
+  <i>Click the image above to watch the demo on YouTube</i>
+</p>
 
 ---
 
