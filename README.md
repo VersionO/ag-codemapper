@@ -15,8 +15,8 @@
 
 **Project Resources:**
 
-* **Developed as the Capstone Project for [Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google](https://www.kaggle.com/learn-guide/5-day-agents-vibecoding).**
-* **[Read the Competition Write-up](https://kaggle.com/competitions/vibecoding-agents-capstone-project/writeups/new-writeup-1783255103546)**
+* **The Capstone Project for [Kaggle’s 5-Day AI Agents: Intensive Vibe Coding Course with Google](https://www.kaggle.com/learn-guide/5-day-agents-vibecoding).**
+* **[Read the Competition Writeup](https://kaggle.com/competitions/vibecoding-agents-capstone-project/writeups/new-writeup-1783255103546)**
 --- 
 
 
