@@ -69,7 +69,7 @@ This project was developed through an iterative process of architectural design,
 
 4.  **CLI-Driven Generation**: With the core logic solidified, we generated the `app/agent.py` runner using the ADK 2.0 CLI with the following prompt:
 
-    > "Use ADK 2.0 to generate the app/agent.py and configuration for ag-codemapper. I have already defined the skills in .agents/, the CONTEXT.md, and the workflow in agent.md. Please wire these existing skills into the agent runner to execute the dependency analysis without creating any deployment files."
+    > Use ADK 2.0 to generate the app/agent.py and configuration for ag-codemapper. I have already defined the skills in .agents/, the CONTEXT.md, and the workflow in agent.md. Please wire these existing skills into the agent runner to execute the dependency analysis without creating any deployment files.
 
     *Developers can manually modify the `app/agent.py` runner or the associated configuration files to point to local, private LLM instances (such as Ollama or other self-hosted providers), allowing you to maintain full data sovereignty as your requirements evolve.*
 
@@ -156,8 +156,6 @@ The agent stores all generated insights in the `/output` folder as structured Ma
 * **Graph Flowchart**: Once the server is active, the link renders an interactive flowchart representing the codebase dependencies and logic flows:
 
   ![Graph 1 - App.py Flowchart](assets/Graph%201%20-%20App.py%20Flowchart.png)
-
-  ![Graph 2 - App.py Flowchart](assets/Graph%202%20-%20App.py%20Flowchart.png)
 
 ---
 
