@@ -1,4 +1,4 @@
-# Agentic CodeMapper: Multi-Skill Agent Deep Code Analysis
+# Agentic-CodeMapper: Multi-Skill, Local-First Architectural Analysis Agent
 
 [![Kaggle Capstone](https://img.shields.io/badge/Kaggle-Capstone_Project-blue)](https://www.kaggle.com/competitions/vibecoding-agents-capstone-project/overview)
 
